@@ -1,1 +1,1 @@
-Dossier contenant la base de données de l'application
+Dossier contenant la base de données de l'application.

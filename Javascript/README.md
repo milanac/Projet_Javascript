@@ -1,1 +1,1 @@
-Dossier contenant les fichiers javascript de l'application
+Dossier contenant les fichiers javascript de l'application.
