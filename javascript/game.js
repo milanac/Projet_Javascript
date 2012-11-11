@@ -12,7 +12,7 @@
     var downKey = 40;
 
     function resizeCanvas() {
-        canvas.width = document.width -20;
+        canvas.width = document.width - 20;
         canvas.height = document.height - 20;
     }
 
@@ -45,8 +45,8 @@
     }
 
     function initObjects() {
-        car = new Car('./image/car.png', (canvas.width / 2) + 300, (canvas.height / 2)+ 150);
-        map = new Map('./image/map.png', canvas.width/2-900/2, canvas.height/2-623/2);
+        car = new Car('./image/car.png', (canvas.width / 2) + 300, (canvas.height / 2) + 150);
+        map = new Map('./image/map.png', canvas.width / 2 - 900 / 2, canvas.height / 2 - 623 / 2);
     }
 
     function drawObjects() {
@@ -78,10 +78,16 @@
         var data = canvasContext.getImageData(car.x, car.y, 1, 1).data;
         if(data[0] == 226 && data[1] == 226 && data[2] == 226) {
             car.speedStep = 2;
-            car.maxSpeed = 7
+            car.topSpeed = 12;
         } else {
-            car.speedStep = 0.5;
-            car.maxSpeed = 1;
+            if(data[0] == 196 && data[1] == 196 && data[2] == 196) {
+                car.speedStep = 1;
+                car.topSpeed =  10;
+            } else {
+                car.speedStep = 0.5;
+                car.topSpeed = 1;
+            }
+
         }
         data = null;
     }
