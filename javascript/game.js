@@ -24,12 +24,11 @@
         this.y = y;
         this.angle = 90;
 
-        this.topSpeed = 12;
+        this.topSpeed = 10;
         this.friction = 0.8;
         this.speed = 0;
-        this.rotationStep = 4;
-        this.speedStep = 2;
-
+        this.rotationStep = 3;
+        this.speedStep = 1.5;
         this.left = false;
         this.forward = false;
         this.right = false;
@@ -77,15 +76,15 @@
     function detectCollision() {
         var data = canvasContext.getImageData(car.x, car.y, 1, 1).data;
         if(data[0] == 226 && data[1] == 226 && data[2] == 226) {
-            car.speedStep = 2;
-            car.topSpeed = 12;
+            car.speedStep = 1.5;
+            car.topSpeed = 10;
         } else {
             if(data[0] == 196 && data[1] == 196 && data[2] == 196) {
                 car.speedStep = 1;
-                car.topSpeed =  10;
+                car.topSpeed =  9;
             } else {
                 car.speedStep = 0.5;
-                car.topSpeed = 1;
+                car.topSpeed = 4;
             }
 
         }
