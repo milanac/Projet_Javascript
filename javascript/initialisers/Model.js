@@ -4,4 +4,13 @@ var Model = function (attributes) {
             this[property] = attributes[property];
         }
     }
+
+    var _this = this;
+     if (Model.initialized !== true) {
+        Model.prototype = {
+
+        }
+        Model.initialized = true;
+    }
+    this.init();
 }
