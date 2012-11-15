@@ -25,7 +25,7 @@
       if(typeof append === "string") {
         element.appendChild(document.createTextNode(append));
       } else {
-        element.appendChild(element);
+        element.appendChild(append);
       }
 
       return element;

@@ -1,13 +1,19 @@
 <html>
- <head>
-  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-  <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-  <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-  <META NAME="ROBOTS" CONTENT="INDEX,FOLLOW,NOARCHIVE">
-
-    <meta charset='utf-8'>
-    <LINK rel="stylesheet" type="text/css" href="css/style.css">
+<head>
+  <LINK rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="./../javascript/helper.js"></script>
+    
     <script>
+    
+    window.addEventListener('load', function () {
+      //céation des elements de la map
+      elementArticle = creator("article", "");
+      document.body.appendChild(elementArticle);
+      elementDiv = creator("div", "", {id: "map", style: "height:20%; width:20%"}, undefined);
+      //elementBouton = creator("input", "", {id: "bouton", type: "button", value: "Localiser votre adversaire"}, undefined);
+      elementArticle.appendChild(elementDiv);
+      //elementArticle.appendChild(elementBouton);
+
       var failFunc = function(e) { console.error(e) };
       var successFunc = function(e) { console.log(e) };
       var geoOptions = {
@@ -16,57 +22,47 @@
         maximumAge: 10000 //ms
       };
       navigator.geolocation.getCurrentPosition(successFunc,
-      /*Optionnel*/ failFunc,
-      /*Optionnel*/ geoOptions);
-  
+        /*Optionnel*/ failFunc,
+        /*Optionnel*/ geoOptions);
+
       var wId = navigator.geolocation.watchPosition(successFunc,
-      /*Optionnel*/ failFunc,
-      /*Optionnel*/ geoOptions);
+        /*Optionnel*/ failFunc,
+        /*Optionnel*/ geoOptions);
       if (false) navigator.geolocation.clearWatch(wId);
-    </script>
-</head>
-<body> 
-<article>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-    <h3>Géo-localisation: la démo</h3>
-    <div id="map" style='height:80%; width:80%'></div>
-
-<input id="bouton" type="button" value="Localiser sur une carte" />
 
 
-<script>
 // @author: http://www.alsacreations.com/tuto/lire/926-geolocalisation-geolocation-html5.html
 // Position par défaut (Châtelet à Paris)
 var centerpos = new google.maps.LatLng(48.579400,7.7519);
 
 // Options relatives à la carte
 var optionsGmaps = {
-    center:centerpos,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    zoom: 15
+  center:centerpos,
+  mapTypeId: google.maps.MapTypeId.ROADMAP,
+  zoom: 15
 };
 // ROADMAP peut être remplacé par SATELLITE, HYBRID ou TERRAIN
 // Zoom : 0 = terre entière, 19 = au niveau de la rue
- 
+
 // Initialisation de la carte pour l'élément portant l'id "map"
 var map = new google.maps.Map(document.getElementById("map"), optionsGmaps);
-  
+
 // .. et la variable qui va stocker les coordonnées
 var latlng;
 
 // Fonction de callback en cas de succès
 function maPosition(position) {
- 
-    var infopos = "Position déterminée :\n";
-    infopos += "Latitude : "+position.coords.latitude +"\n";
-    infopos += "Longitude: "+position.coords.longitude+"\n";
-    infopos += "Altitude : "+position.coords.altitude +"\n";
-    infopos += "Vitesse  : "+position.coords.speed +"\n";
-    console.log(infopos);
- 
+
+  var infopos = "Position déterminée :\n";
+  infopos += "Latitude : "+position.coords.latitude +"\n";
+  infopos += "Longitude: "+position.coords.longitude+"\n";
+  infopos += "Altitude : "+position.coords.altitude +"\n";
+  infopos += "Vitesse  : "+position.coords.speed +"\n";
+  console.log(infopos);
+
     // Un nouvel objet LatLng pour Google Maps avec les paramètres de position
     latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
- 
+
     // Ajout d'un marqueur à la position trouvée
     var marker = new google.maps.Marker({
       position: latlng,
@@ -76,41 +72,44 @@ function maPosition(position) {
     
     // Permet de centrer la carte sur la position latlng
     map.panTo(latlng);
- 
-}
+
+  }
 
 // Fonction de callback en cas d’erreur
 function erreurPosition(error) {
-    var info = "Erreur lors de la géolocalisation : ";
-    switch(error.code) {
+  var info = "Erreur lors de la géolocalisation : ";
+  switch(error.code) {
     case error.TIMEOUT:
-      info += "Timeout !";
+    info += "Timeout !";
     break;
     case error.PERMISSION_DENIED:
     info += "Vous n’avez pas donné la permission";
     break;
     case error.POSITION_UNAVAILABLE:
-      info += "La position n’a pu être déterminée";
+    info += "La position n’a pu être déterminée";
     break;
     case error.UNKNOWN_ERROR:
     info += "Erreur inconnue";
     break;
-    }
-    document.getElementById("infoposition").innerHTML = info;
+  }
+  document.getElementById("infoposition").innerHTML = info;
 }
 
 function startGMap() {
   if(navigator.geolocation) {
-      survId = navigator.geolocation.getCurrentPosition(maPosition,erreurPosition);
+    survId = navigator.geolocation.getCurrentPosition(maPosition,erreurPosition);
   } else {
-      alert("Ce navigateur ne supporte pas la géolocalisation");
+    alert("Ce navigateur ne supporte pas la géolocalisation");
   }
 }
-</script>
-  <script type="text/javascript">
-  document.getElementById("bouton").addEventListener('onclick', startGMap());
-</script>
 
-</article>
+//document.getElementById("bouton").addEventListener('click', startGMap());
+startGMap();
+    });
+</script>
+</head>
+<body> 
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
 </body>
 </html>

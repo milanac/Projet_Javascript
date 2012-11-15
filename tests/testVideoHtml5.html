@@ -1,36 +1,35 @@
 <html>
- <head>
-	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-	<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-	<META HTTP-EQUIV="EXPIRES" CONTENT="0">
-	<META NAME="ROBOTS" CONTENT="INDEX,FOLLOW,NOARCHIVE">
-
-    <meta charset='utf-8'>
-    <LINK rel="stylesheet" type="text/css" href="css/style.css">
+<head>
+  <LINK rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="./../javascript/helper.js"></script>
     <script type="text/javascript">
+    window.onload = function () {
+      elementSection = creator("section", "", {align: "center"}, undefined);
+      document.body.appendChild(elementSection);
+      elementVideo = creator("video", "", {id: "Video1", controls:"controls"}, undefined);
+      elementSection.appendChild(elementVideo);
+      elementSource = creator("source", "", {src: "videos/Michael Jackson (Par Mozinor).mp4", type: "video/mp4"}, undefined);
+
+      elementVideo.appendChild(elementSource);
+      elementVideo.appendChild(document.createTextNode("Your browser does not support the video tag"));
+      vidplay();
+    }
+    
 
     function vidplay() {
-       var video = document.getElementById("Video1");
-       var button = document.getElementById("play");
-       video.width = window.innerWidth;
-       video.height = window.innerHeight;
-       if (video.paused) {
-          video.play();
-          button.textContent = "||";
-       } else {
-          video.pause();
-          button.textContent = ">";
-       }
-    }    
-</script>
+     var video = document.getElementById("Video1");
+     var button = document.getElementById("play");
+     video.width = window.innerWidth;
+     video.height = window.innerHeight;
+     if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  }    
+  </script>
 </head>
 <body>	
-	<section align="center">
-		<video id="Video1" controls="controls">
-			<source src="videos/Michael Jackson (Par Mozinor).mp4" type="video/mp4">
-			Your browser does not support the video tag
-		</video>
-	</section>
+
 </body>
-<script type="text/javascript">vidplay()</script>
 </html>
