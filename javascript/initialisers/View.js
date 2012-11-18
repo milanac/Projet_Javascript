@@ -1,14 +1,14 @@
-var View = function () {
-    var _this = this;
-     if (View.initialized !== true) {
-        View.prototype = {
-            init: function (model) {
-                _this.model = model;
-            },
-           render: function (argument) {
-                console.log(model);
-           }
+var View = function(attributes) {
+        if(attributes) {
+            for(property in attributes) {
+                this[property] = attributes[property];
+            }
         }
-        View.initialized = true;
+        var _this = this;
+    }
+
+View.prototype = {
+    render: function(argument) {
+        console.log(model);
     }
 }
