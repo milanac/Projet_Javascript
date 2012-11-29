@@ -1,0 +1,44 @@
+<html>
+<body>
+ <h1>Simple Echo & Chat Server</h1>
+ <form id="form">
+   <input type="text" id="input" value="send a message"></input>
+ </form>
+ <div id="msgs"></div>
+</body>
+
+<script type="text/javascript">
+window.onload = function(){
+  (function(){
+    var id;
+    var show = function(el){
+      return function(msg){ el.innerHTML = msg + '<br />' + el.innerHTML; }
+    }(document.getElementById('msgs'));
+
+    var ws       = new WebSocket('ws://' + window.location.host + window.location.pathname);
+    ws.onopen    = function()  { show('websocket opened'); };
+    ws.onclose   = function()  { show('websocket closed'); }
+    ws.onmessage = function(m) {
+      data = JSON.parse(m.data);
+      if (data.id) {
+        id = data.id;
+      };
+      show('websocket message: ' +  m.data);
+    };
+
+    var sender = function(f){
+      var input     = document.getElementById('input');
+      input.onclick = function(){ input.value = "" };
+      f.onsubmit    = function(){
+        var sending = JSON.stringify({id: id, msg: input.value});
+        console.log(sending);
+        ws.send(sending);
+        //ws.send(input.value);
+        input.value = "send a message";
+        return false;
+      }
+    }(document.getElementById('form'));
+  })();
+}
+</script>
+</html>
