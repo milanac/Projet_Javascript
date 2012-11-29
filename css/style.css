@@ -1,3 +1,18 @@
 canvas{
-  border: 1px solid black;
+  	border: 1px solid black;
+}
+
+.menu{
+	font-size:20px;
+	margin-left:15%;
+	margin-top:35%;
+}
+
+#dragin1, #dragin2{
+			float:left; 
+			width:100px; 
+			height:35px; 
+			margin:10px;
+			padding:10px;
+			border:1px solid #aaaaaa;
 }
