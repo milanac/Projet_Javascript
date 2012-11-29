@@ -3,7 +3,7 @@ var CarModel = function() {
         var defaultImageModule = imageModule(this,'./image/car.png', (canvas.width / 2) + 300, (canvas.height / 2) + 150);
         defaultImageModule();
         Model.call(this, {
-            angle: 90,
+            angle: 0,
             topSpeed: 10,
             friction: 0.8,
             speed: 0,
@@ -17,7 +17,7 @@ var CarModel = function() {
         });
 
     }
-
+    CarModel.prototype = new Model();
     CarModel.prototype.update = function () {
         this.speed *= this.friction;
         if(this.forward) {
@@ -58,7 +58,23 @@ var CarModel = function() {
                 this.y += this.speedY;
             }
         }
+        this.detectCollision();
     }
 
-   // TODO: découler pour map et car
-    // TODO: ajouter Model.prototype.init.apply(this)
+   CarModel.prototype.detectCollision = function () {
+        var data = canvasContext.getImageData(this.x, this.y, 1, 1).data;
+        if(data[0] == 226 && data[1] == 226 && data[2] == 226) {
+            this.speedStep = 1.5;
+            this.topSpeed = 10;
+        } else {
+            if(data[0] == 196 && data[1] == 196 && data[2] == 196) {
+                this.speedStep = 1;
+                this.topSpeed =  9;
+            } else {
+                this.speedStep = 0.5;
+                this.topSpeed = 4;
+            }
+
+        }
+        data = null;
+   }

@@ -5,6 +5,6 @@ var MapView = function (map) {
 }
 MapView.prototype.render = function () {
     canvasContext.save();
-    canvasContext.drawImage(model.image, model.x, model.y);
+    canvasContext.drawImage(this.model.image, this.model.x, this.model.y);
     canvasContext.restore();
 }

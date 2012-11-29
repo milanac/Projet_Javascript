@@ -9,6 +9,8 @@ var View = function(attributes) {
 
 View.prototype = {
     render: function(argument) {
-        console.log(model);
+        if(this.model){
+            console.log(this.model);
+        }
     }
 }

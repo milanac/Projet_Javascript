@@ -57,8 +57,8 @@ var CarView = function(car) {
 
 CarView.prototype.render = function() {
     canvasContext.save();
-    canvasContext.translate(model.x, model.y);
-    canvasContext.rotate(model.angle * Math.PI / 180);
-    canvasContext.drawImage(model.image, -24 * .5, -35 * .5);
+    canvasContext.translate(this.model.x, this.model.y);
+    canvasContext.rotate(this.model.angle * Math.PI / 180);
+    canvasContext.drawImage(this.model.image, -24 * .5, -35 * .5);
     canvasContext.restore();
 }
