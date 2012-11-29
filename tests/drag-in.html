@@ -1,53 +1,8 @@
-<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-	</head>
-	<style type="text/css">
-		#dropzone {
-	      height: 150px;
-	      width: 100%;
-	      -webkit-border-radius: 10px;
-	      -khtml-border-radius: 10px;
-	      -moz-border-radius: 10px;
-	      border-radius: 10px;
-	      border: 2px dashed #0687FF;
-	    }
-	    #dropzone.rounded {
-	      -webkit-box-shadow: inset 0px 0px 50px #777;
-	      -moz-box-shadow: inset 0px 0px 50px #777;
-	      -o-box-shadow: inset 0px 0px 50px #777;
-	      box-shadow: inset 0px 0px 50px #777;
-	    }
-		.boxcenter {
-		-webkit-box-pack: center;
-		-moz-box-pack: center;
-		box-pack: center;
-		}
-	</style>
-	<body>
-		<article id="drag-slide" class="smaller">
-				<h3>File API: Le drag-in</h3>
-				
-				<div id="dropzone" class="boxcenter" ondragenter="this.classList.toggle('rounded');" ondragleave="this.classList.toggle('rounded');"></div>
-				<pre style="margin-top:5px; margin-bottom:5px;">
-					<input type="button" value="Executer" onClick="eval('(function(){'+this.parentElement.textContent+'})();')"/>
-					
-				</pre>
-		</article>
-
-		<script>
-					document.querySelector('#dropzone').addEventListener('drop', function(e) {
-		  				e.preventDefault();
-		  				this.textContent = "Dropé c'est pesé! "+e.dataTransfer.files[0].name;
-					}, false);
-		</script>
-	</body>
-</html>		
--->
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<LINK rel="stylesheet" type="text/css" href="../css/style.css">
+		<script type="text/javascript" src="./../javascript/helper.js"></script>
 		<script>
 		function allowDrop(ev)
 		{
@@ -65,25 +20,24 @@
 			var data=ev.dataTransfer.getData("Text");
 			ev.target.appendChild(document.getElementById(data));
 		}
+
+		window.onload = function () {
+			elementArticle1 = creator("article", "", {id: "dragin1"}, undefined);
+			document.body.appendChild(elementArticle1);
+			elementImg = creator("img", "", {src: "../image/car.png", draggable: "true", id: "drag1", width: "88", height: "31"}, undefined);
+			elementArticle1.appendChild(elementImg);
+			elementArticle2 = creator("article", "", {id: "dragin2"}, undefined);
+			document.body.appendChild(elementArticle2);
+
+			document.getElementById('dragin1').addEventListener('drop', drop);
+			document.getElementById('dragin1').addEventListener('dragover', allowDrop);
+			document.getElementById('dragin2').addEventListener('drop', drop);
+			document.getElementById('dragin2').addEventListener('dragover', allowDrop);
+			document.getElementById('drag1').addEventListener('dragstart', drag);
+		}
 		</script>
 	</head>
 	<body>
 
-
-		<article id="dragin1">
-			<img src="../image/car.png" draggable="true" id="drag1" width="88" height="31">
-		</article>
-
-		<article id="dragin2" >
-
-		</article>
-
 	</body>
-	<script type="text/javascript">
-	document.getElementById('dragin1').addEventListener('drop', drop);
-	document.getElementById('dragin1').addEventListener('dragover', allowDrop);
-	document.getElementById('dragin2').addEventListener('drop', drop);
-	document.getElementById('dragin2').addEventListener('dragover', allowDrop);
-	document.getElementById('drag1').addEventListener('dragstart', drag);
-	</script>
 </html>
