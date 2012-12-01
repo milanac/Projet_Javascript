@@ -1,54 +1,58 @@
-var ZonesModel = function() {
+var ZonesModel = function(middleX, middleY) {
         var _this = this;
         Model.call(this, {
             zones: [{
-                startX: 920,
-                startY: 423,
-                stopX: 1046,
-                stopY: 393,
+                startX: 247,
+                startY: 92,
+                stopX: 373,
+                stopY: 62,
                 passed: false
             },
             {
-                startX: 720,
-                startY: 127,
-                stopX: 777,
-                stopY: 53,
+                startX: 47,
+                startY: -204,
+                stopX: 104,
+                stopY: -278,
                 passed: false
             },
             {
-                startX: 307,
-                startY: 498,
-                stopX: 401,
-                stopY: 431,
+                startX: -366,
+                startY: 167,
+                stopX: -272,
+                stopY: 100,
                 passed: false
             },
             {
-                startX: 692,
-                startY: 270,
-                stopX: 757,
-                stopY: 190,
+                startX: 19,
+                startY: -61,
+                stopX: 84,
+                stopY: -141,
                 passed: false
             }],
 
             finalCheckpoint: {
-                startX: 920,
-                startY: 423,
-                stopX: 1046,
-                stopY: 393,
+                startX: 247,
+                startY: 92,
+                stopX: 373,
+                stopY: 62,
                 passed: false
             }
         })
     }
 ZonesModel.prototype =  new Model();
 ZonesModel.prototype.passOnZone = function(zone, pointX, pointY) {
-    var m, p, result, xMin, xMax, YMin, YMax;
-    m = (zone.stopY - zone.startY) / (zone.stopX - zone.startX);
-    p = zone.startY - (m * zone.startX);
+    var m, p, result, xMin, xMax, YMin, YMax, zoneStartX, zoneStartY, zoneStopX, zoneStopY;
+    zoneStartX = zone.startX + middleX;
+    zoneStartY = zone.startY + middleY;
+    zoneStopX = zone.stopX + middleX;
+    zoneStopY = zone.stopY + middleY;
+    m = (zoneStopY - zoneStartY) / (zoneStopX - zoneStartX);
+    p = zoneStartY - (m * zoneStartX);
     result = pointX * m + p;
-    xMin = Math.min(zone.startX, zone.stopX);
-    xMax = Math.max(zone.startX, zone.stopX);
-    yMin = Math.min(zone.startY, zone.stopY);
-    yMax=  Math.max(zone.stopY, zone.stopY);
+    xMin = Math.min(zoneStartX, zoneStopX);
+    xMax = Math.max(zoneStartX, zoneStopX);
+    yMin = Math.min(zoneStartY, zoneStopY);
+    yMax=  Math.max(zoneStartY, zoneStopY);
     if(((Math.floor(result) <= Math.floor(pointY) + 10 && Math.floor(result) >= Math.floor(pointY) - 10 ) || (Math.ceil(result) <= Math.ceil(pointY) + 10 && Math.ceil(result) >= Math.ceil(pointY) - 10)) && ((pointX >= xMin && pointX <= xMax) || (pointY >= yMin && pointY <= yMax))) {
         return true;
     }

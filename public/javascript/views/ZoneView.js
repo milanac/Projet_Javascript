@@ -1,7 +1,7 @@
 var ZonesView = function(zones) {
     var _this = this;
     View.call(this, {
-      model: zones || new ZoneModel()
+      model: zones || new ZonesModel()
     });
   }
 ZonesView.prototype = new View();
@@ -14,8 +14,8 @@ ZonesView.prototype.render = function() {
       if(!zone.passed) {
         canvasContext.save();
         canvasContext.beginPath();
-        canvasContext.moveTo(zone.startX, zone.startY);
-        canvasContext.lineTo(zone.stopX, zone.stopY);
+        canvasContext.moveTo(zone.startX + middleX, zone.startY + middleY);
+        canvasContext.lineTo(zone.stopX + middleX, zone.stopY+ middleY);
         canvasContext.lineWidth = 5;
 
         // set line color
@@ -28,8 +28,8 @@ ZonesView.prototype.render = function() {
   } else {
     canvasContext.save();
     canvasContext.beginPath();
-    canvasContext.moveTo(this.model.finalCheckpoint.startX, this.model.finalCheckpoint.startY);
-    canvasContext.lineTo(this.model.finalCheckpoint.stopX, this.model.finalCheckpoint.stopY);
+    canvasContext.moveTo(this.model.finalCheckpoint.startX + middleX, this.model.finalCheckpoint.startY + middleY);
+    canvasContext.lineTo(this.model.finalCheckpoint.stopX + middleX, this.model.finalCheckpoint.stopY+ middleY);
     canvasContext.lineWidth = 6;
 
     // set line color

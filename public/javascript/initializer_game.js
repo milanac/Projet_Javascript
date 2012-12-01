@@ -1,10 +1,11 @@
 var canvas = document.createElement("canvas"),
-    canvasContext = canvas.getContext("2d");
-
-    resizeCanvas();
+    canvasContext = canvas.getContext("2d"),
+    middleX,
+    middleY;
+resizeCanvas();
 var carModel = new CarModel(),
     mapModel = new MapModel(),
-    zonesModel = new ZonesModel(),
+    zonesModel = new ZonesModel(canvas.width / 2, canvas.width / 2),
     zonesView = new ZonesView(zonesModel),
     carView = new CarView(carModel),
     carController = new CarController(carView, carModel),
@@ -15,6 +16,9 @@ var carModel = new CarModel(),
 function resizeCanvas() {
     canvas.width = document.width - 20;
     canvas.height = document.height - 20;
+    middleX = canvas.width / 2;
+    middleY = canvas.height / 2;
+
 }
 
 function clearCanvas() {
