@@ -6,6 +6,7 @@ class MySinatraApp < Sinatra::Base
   set :server, 'thin'
   set :channels, []
   get '/' do
+    warn(request.websocket?.inspect)
     if !request.websocket?
       redirect "/index.html"
       #erb :index
