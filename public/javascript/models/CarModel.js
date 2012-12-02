@@ -1,8 +1,9 @@
-var CarModel = function() {
+var CarModel = function(src, x, y) {
         var _this = this;
-        var defaultImageModule = imageModule(this,'./image/car.png', (canvas.width / 2) + 300, (canvas.height / 2) + 150);
+        var defaultImageModule = imageModule(this, src, x, y);
         defaultImageModule();
         Model.call(this, {
+            id: null,
             angle: 0,
             topSpeed: 10,
             friction: 0.8,
@@ -77,4 +78,16 @@ var CarModel = function() {
 
         }
         data = null;
+   }
+
+   CarModel.prototype.getRelativeCoordonate = function () {
+        var relativeX, relativeY;
+        relativeX = this.x - middleX;
+        relativeY = this.y - middleY;
+       return {id: this.id, x: relativeX, y: relativeY, angle: this.angle};
+   }
+   CarModel.prototype.initialiseGoodId = function(src, x, y, id){
+    var defaultImageModule = imageModule(this, src, x, y);
+        defaultImageModule();
+    this.id = id;
    }

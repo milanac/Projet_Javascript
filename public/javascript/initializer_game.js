@@ -3,14 +3,19 @@ var canvas = document.createElement("canvas"),
     middleX,
     middleY;
 resizeCanvas();
-var carModel = new CarModel(),
+var firstCarModel = {src: './image/car.png', x: (canvas.width / 2) + 300, y: (canvas.height / 2) + 150},
+    redCarModel = {src: './image/car-red.png', x: (canvas.width / 2) + 350, y: (canvas.height / 2) + 150};
+var myCarModel = new CarModel(firstCarModel.src, firstCarModel.x, firstCarModel.y),
+    hisCarModel = new CarModel(redCarModel.src, redCarModel.x, redCarModel.y),
     mapModel = new MapModel(),
     zonesModel = new ZonesModel(canvas.width / 2, canvas.width / 2),
     zonesView = new ZonesView(zonesModel),
-    carView = new CarView(carModel),
-    carController = new CarController(carView, carModel),
+    myCarView = new CarView(myCarModel, true),
+    hisCarView = new CarView(hisCarModel, false),
+    myCarController = new CarController(myCarView, myCarModel),
     mapView = new MapView(mapModel),
-    playAnimation = true;
+    playAnimation = false,
+    state = 1;
 
 
 function resizeCanvas() {
@@ -29,19 +34,31 @@ function clearCanvas() {
 function updateStage() {
     clearCanvas();
     mapView.render();
-    zonesModel.passOnMyZones(carModel);
-    carModel.update();
+    zonesModel.passOnMyZones(myCarModel);
+    myCarModel.update();
+    myWebSockets.sendMessage(myCarModel.getRelativeCoordonate());
     zonesView.render();
-    carView.render();
+    myCarView.render();
+    hisCarView.render();
+    // if(playAnimation) {
+    //     setTimeout(updateStage, 25);
+    // }
+}
 
-    if(playAnimation) {
-        setTimeout(updateStage, 25);
-    }
+function checkIfGo () {
+    if (state == 2) {
+        selectorFirst("#waiting").style.opacity = 0;
+        playAnimation = true;
+        updateStage();
+    };
 }
 
 window.onresize = resizeCanvas;
 window.onload = function() {
+    //init Game
+    myWebSockets.connect(window.location.host + "/");
     resizeCanvas();
+    selectorFirst("#waiting").style.opacity = 1;
     document.body.appendChild(canvas);
-    updateStage();
+    setTimeout(updateStage, 1000);
 }

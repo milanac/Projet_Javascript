@@ -6,3 +6,11 @@ var imageModule = function (self, src, x, y) {
         self.y = y;
     }
 }
+
+var getCarById = function (id) {
+    if(myCarModel.id == id){
+        return myCarModel;
+    }else{
+        return hisCarModel;
+    }
+}

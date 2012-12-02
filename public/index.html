@@ -6,6 +6,7 @@
 
   <title></title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/modal.css">
   <script type="text/javascript" src="javascript/helper.js"></script>
   <script type="text/javascript" src="javascript/initialisers/pubsub.js"></script>
   <script type="text/javascript" src="javascript/initialisers/Model.js"></script>
@@ -19,6 +20,7 @@
   <script type="text/javascript" src="javascript/controllers/CarController.js"></script>
   <script type="text/javascript" src="javascript/models/ZoneModel.js"></script>
   <script type="text/javascript" src="javascript/views/ZoneView.js"></script>
+  <script type="text/javascript" src="javascript/initialisers/websockets.js"></script>
   <script type="text/javascript" src="javascript/initializer_game.js"></script>
 
 
@@ -27,5 +29,11 @@
     max-height: 100%;
     overflow: hidden;
 ">
+<section id="waiting" class="modal">
+    <div>
+      <h1>Waiting for another player</h1>
+      <p>We find another player please, wait.</p>
+    </div>
+</section>
 </body>
 </html>
