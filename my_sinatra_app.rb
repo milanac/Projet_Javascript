@@ -45,6 +45,15 @@ class MySinatraApp < Sinatra::Base
         end
         ws.onclose do
           warn("wetbsocket closed")
+          settings.channels.each do |channel|
+            if channel[:sockets].include?(ws)
+              channel[:sockets].delete(ws)
+              warn("socket deleted")
+              if socket = channel[:sockets].first
+                EM.next_tick { socket.send({:restart => true }.to_json)}
+              end
+            end
+          end
           #settings.sockets.delete(ws)
         end
       end
