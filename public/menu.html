@@ -1,24 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 	<head>
-		 <LINK rel="stylesheet" type="text/css" href="css/style.css">
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Mario Kart 2D</title>
+		<LINK rel="stylesheet" type="text/css" href="css/style.css">
+		<script type="text/javascript" src="javascript/helper.js"></script>
 	</head>
-	<body>
-		<table class="menu">
-			<tr>
-				<td><img src="./image/logo_mario.ico" height="35" width="35" id="jouer"><a href="index.html">Single Player</a></td>
-			</tr>
-			<tr>
-				<td><img src="./image/logo_mario.ico" height="35" width="35" id="kart"><a href="choixKart.html">Multiplayer</a></td>
-			</tr>
-			<tr>
-				<td><img src="./image/logo_mario.ico" height="35" width="35" id="instr"><a href="instructions.html">Instructions</a></td>
-			</tr>
-			<tr>
-				<td><img src="./image/logo_mario.ico" height="35" width="35" id="high"><a href="highscore.html">Highscore</a></td>
-			</tr>
-		</table>
+	<body background="image/marioKartBg.jpg">
+	  <section class="menu">
+		  <div class="event" data-id="play">
+		    <button>Play</button>
+		  </div>
+		  <br>
+		  <div class="event" data-id="score">
+		    <button>Scores</button>
+		  </div>
+	  </section>
 	</body>
+
+	<script type="text/javascript">
+	  divs = selectorAll(".event");
+	  //boucle
+	  for(i = 0; i < divs.length; i++){
+	    divs[i].addEventListener("click", function(event){
+	      // this.data.id
+	      if(this.dataset.id == "play"){
+	        alert("play");
+	        selectorFirst(".menu").style.opacity = 0;
+	      }else if(this.dataset.id == "score"){
+	      	alert("score")
+	      }
+	    });
+	  }
+	</script>
 </html>

@@ -21,3 +21,10 @@ canvas{
 			padding:10px;
 			border:1px solid #aaaaaa;
 }
+
+body{
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}

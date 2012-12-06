@@ -3,7 +3,7 @@
       return document.querySelector(query);
     },
     selectorAll = function(query) {
-      document.querySelectorAll(query);
+      return document.querySelectorAll(query);
     },
     creator = function(type, append, attributes, styles) {
       var element;
