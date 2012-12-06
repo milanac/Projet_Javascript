@@ -9,7 +9,11 @@ var CarController = function (view, model) {
 
 
     pubsub.subscribe("car/finish_lap", function (topics, data) {
-        console.log("FINISH A LAP");
+        number_map += 1;
+        if (number_map == 3) {
+            myWebSockets.sendMessage(null, "finish");
+        };
+        selectorFirst("#number_map").textContent = number_map;
     });
 
 }

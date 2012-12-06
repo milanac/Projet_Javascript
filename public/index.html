@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/modal.css">
   <script type="text/javascript" src="javascript/helper.js"></script>
+  <script type="text/javascript" src="javascript/jquery-1.8.3.min.js"></script>
   <script type="text/javascript" src="javascript/initialisers/pubsub.js"></script>
   <script type="text/javascript" src="javascript/initialisers/Model.js"></script>
   <script type="text/javascript" src="javascript/initialisers/View.js"></script>
@@ -15,15 +16,26 @@
   <script type="text/javascript" src="javascript/initialisers/helpers_functions.js"></script>
   <script type="text/javascript" src="javascript/models/CarModel.js"></script>
   <script type="text/javascript" src="javascript/models/MapModel.js"></script>
+  <script type="text/javascript" src="javascript/models/VideoModel.js"></script>
   <script type="text/javascript" src="javascript/models/ItemBoxModel.js"></script>
   <script type="text/javascript" src="javascript/views/ItemBoxView.js"></script>
+  <script type="text/javascript" src="javascript/models/PlayerModel.js"></script>
+  <script type="text/javascript" src="javascript/views/PlayerView.js"></script>
+  <script type="text/javascript" src="javascript/models/ItemBoxManagerModel.js"></script>
+  <script type="text/javascript" src="javascript/views/ItemBoxManagerView.js"></script>
   <script type="text/javascript" src="javascript/views/CarView.js"></script>
   <script type="text/javascript" src="javascript/views/MapView.js"></script>
   <script type="text/javascript" src="javascript/controllers/CarController.js"></script>
   <script type="text/javascript" src="javascript/models/ZoneModel.js"></script>
   <script type="text/javascript" src="javascript/views/ZoneView.js"></script>
+   <script type="text/javascript" src="javascript/models/PlayerModel.js"></script>
+  <script type="text/javascript" src="javascript/views/PlayerView.js"></script>
+   <script type="text/javascript" src="javascript/models/SpellModel.js"></script>
+  <script type="text/javascript" src="javascript/views/SpellView.js"></script>
+  <script type="text/javascript" src="javascript/controllers/ItemBoxController.js"></script>
   <script type="text/javascript" src="javascript/initialisers/websockets.js"></script>
   <script type="text/javascript" src="javascript/initializer_game.js"></script>
+
 
 
 </head>
@@ -31,6 +43,16 @@
     max-height: 100%;
     overflow: hidden;
 ">
+<section id="score">
+  <div id="maps">
+    <span id="number_map">
+      0
+    </span>
+    <span>
+      /3
+    </span>
+  </div>
+</section>
 <section id="waiting" class="modal">
     <div>
       <h1>Waiting for another player</h1>

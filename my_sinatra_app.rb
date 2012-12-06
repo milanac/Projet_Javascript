@@ -5,6 +5,11 @@ class MySinatraApp < Sinatra::Base
   require "debugger"
   set :server, 'thin'
   set :channels, []
+
+  post '/record' do
+    content_type :json
+     {:text => "#{params[:name]} make a record"}.to_json
+  end
   get '/' do
     warn(request.websocket?.inspect)
     if !request.websocket?
@@ -39,7 +44,7 @@ class MySinatraApp < Sinatra::Base
             channel = channels.at(index)
           end
           if channel
-            EM.next_tick { channel[:sockets].each{|s| s.send({:evented => params["evented"]}.to_json) } }
+            EM.next_tick { channel[:sockets].each{|s| s.send({:evemt => params["evemt"], :evented => params["evented"]}.to_json) } }
           else
             EM.next_tick {ws.send({:error => true}.to_json)}
           end

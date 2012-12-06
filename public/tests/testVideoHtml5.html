@@ -4,9 +4,9 @@
     <script type="text/javascript" src="./../javascript/helper.js"></script>
     <script type="text/javascript">
     window.onload = function () {
-      elementSection = creator("section", "", {align: "center"}, undefined);
+      elementSection = creator("section", "", {align: "center"});
       document.body.appendChild(elementSection);
-      elementVideo = creator("video", "", {id: "Video1", controls:"controls"}, undefined);
+      elementVideo = creator("video", "", {id: "Video1", controls:"controls"});
       elementSection.appendChild(elementVideo);
       elementSource = creator("source", "", {src: "videos/Michael Jackson (Par Mozinor).mp4", type: "video/mp4"}, undefined);
 
@@ -14,7 +14,7 @@
       elementVideo.appendChild(document.createTextNode("Your browser does not support the video tag"));
       vidplay();
     }
-    
+
 
     function vidplay() {
      var video = document.getElementById("Video1");
@@ -26,10 +26,10 @@
     } else {
       video.pause();
     }
-  }    
+  }
   </script>
 </head>
-<body>	
+<body>
 
 </body>
 </html>

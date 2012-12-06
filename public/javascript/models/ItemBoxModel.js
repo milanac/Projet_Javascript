@@ -1,15 +1,22 @@
-var ItemBoxModel = function (x, y, spell) {
-    var _this = this;
-    var defaultImageModule = imageModule(this,'./image/item_box.png', x, y);
+var ItemBoxModel = function(id, x, y, spell) {
+        var _this = this;
+        var defaultImageModule = imageModule(this, './image/item_box.png', x, y);
         defaultImageModule();
         Model.call(this, {
+            id: id,
             spell: spell,
             isOpen: false
         });
-}
+    }
 ItemBoxModel.prototype = new Model();
 ItemBoxModel.prototype.isCollisionWithCar = function(car) {
-    carImageData = GetImageData(car);
-    thisImageData = GetImageData(this);
-    return isPixelCollision(carImageData, car.x, car.y, thisImageData, this.x + middleX, this.y + middleY, false);
+    return checkCollision(car, this, car.x, car.y, this.x + middleX, this.y + middleY);
+};
+ItemBoxModel.prototype.changeOpenAndPushEventIfCollision = function(car) {
+    if(this.isCollisionWithCar(car)) {
+        this.isOpen = true;
+        pubsub.publish("itembox/collision", {
+            id: this.id
+        });
+    }
 };

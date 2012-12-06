@@ -3,6 +3,10 @@ canvas{
   	margin: auto;
 }
 
+#score{
+	position: absolute;
+}
+
 .menu{
 	font-size:20px;
 	margin-left:15%;

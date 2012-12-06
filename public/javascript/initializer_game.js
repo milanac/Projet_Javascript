@@ -1,10 +1,18 @@
 var canvas = document.createElement("canvas"),
     canvasContext = canvas.getContext("2d"),
-    middleX,
-    middleY;
+    middleX, middleY, number_map = 0,
+    finish = false;
 resizeCanvas();
-var firstCarModel = {src: './image/car.png', x: (canvas.width / 2) + 300, y: (canvas.height / 2) + 150},
-    redCarModel = {src: './image/car-yellow.png', x: (canvas.width / 2) + 350, y: (canvas.height / 2) + 150};
+var firstCarModel = {
+    src: './image/car.png',
+    x: (canvas.width / 2) + 300,
+    y: (canvas.height / 2) + 150
+},
+    redCarModel = {
+        src: './image/car-yellow.png',
+        x: (canvas.width / 2) + 350,
+        y: (canvas.height / 2) + 150
+    };
 var myCarModel = new CarModel(firstCarModel.src, firstCarModel.x, firstCarModel.y),
     hisCarModel = new CarModel(redCarModel.src, redCarModel.x, redCarModel.y),
     mapModel = new MapModel(),
@@ -16,8 +24,8 @@ var myCarModel = new CarModel(firstCarModel.src, firstCarModel.x, firstCarModel.
     mapView = new MapView(mapModel),
     playAnimation = false,
     state = 1,
-    itemBoxModel1 = new ItemBoxModel(300, 150, null);
-    itemBoxView1 = new ItemBoxView(itemBoxModel1);
+    itemBoxManagerModel = new ItemBoxManagerModel();
+itemBoxManagerView = new ItemBoxManagerView(itemBoxManagerModel), playerModel = new PlayModel(), playerView = new PlayerView(playerModel);
 
 function resizeCanvas() {
     canvas.width = document.width - 20;
@@ -34,26 +42,55 @@ function clearCanvas() {
 
 function updateStage() {
     clearCanvas();
-    //console.log(itemBoxModel1.isCollisionWithCar(myCarModel));
+    itemBoxManagerModel.checkIfCollisionWithCar(myCarModel);
     mapView.render();
     zonesModel.passOnMyZones(myCarModel);
     myCarModel.update();
     myWebSockets.sendMessage(myCarModel.getRelativeCoordonate());
-    itemBoxView1.render();
+    itemBoxManagerView.render();
     zonesView.render();
     myCarView.render();
     hisCarView.render();
+    playerView.render();
     // if(playAnimation) {
     //     setTimeout(updateStage, 25);
     // }
 }
 
-function checkIfGo () {
-    if (state == 2) {
+function checkIfGo() {
+    if(state == 2) {
         selectorFirst("#waiting").style.opacity = 0;
         playAnimation = true;
         updateStage();
     };
+    if(finish) {
+        state == 3;
+        if(number_map == 3) {
+            var name = prompt("Please enter your name", "Roger?");
+            $.ajax({
+                url: window.location.host + "/record",
+                type: 'get',
+                data: {
+                    name: name
+                },
+                success: function(data) {
+                    var r = confirm(data.text);
+                    if(r == true) {
+                        window.location.reload();
+                    } else {
+                        window.location.reload();
+                    }
+                }
+            });
+        } else {
+            var r = confirm("You Loose!");
+            if(r == true) {
+                window.location.reload();
+            } else {
+                window.location.reload();
+            }
+        }
+    }
 }
 
 window.onresize = resizeCanvas;

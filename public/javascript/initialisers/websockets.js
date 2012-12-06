@@ -19,12 +19,18 @@ var myWebSockets = {};
             if(data.state){
                 state = data.state
             }
+            if(data.evemt == "finish"){
+                finish = true;
+            }
             if(data.evented){
                 if(data.evented.id && hisCarModel.id == data.evented.id){
                     // console.log(data.evented);
                     // car = getCarById(data.evented.id);
                     hisCarModel.setAttributes(data.evented);
                 }
+            }
+            if(data.restart){
+                window.location.reload();
             }
         }
 
@@ -43,11 +49,12 @@ var myWebSockets = {};
         ws.onopen = openned;
     }
 
-    q.sendMessage = function(data) {
+    q.sendMessage = function(data, evemt) {
         if(ws) {
             var sending = JSON.stringify({
                 id: id,
-                evented: data
+                evented: data,
+                evemt: evemt
             });
             ws.send(sending);
         } else {
