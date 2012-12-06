@@ -67,7 +67,7 @@ CarView.prototype.render = function() {
     if (this.moved) {
         canvasContext.translate(this.model.x, this.model.y);
         canvasContext.rotate(this.model.angle * Math.PI / 180);
-        canvasContext.drawImage(this.model.image, -24 * .5, -35 * .5);
+        canvasContext.drawImage(this.model.image, -this.model.image.width * .5, -this.model.image.height * .5);
     } else{
         canvasContext.translate(this.model.x + middleX, this.model.y + middleY);
         canvasContext.rotate(this.model.angle * Math.PI / 180);

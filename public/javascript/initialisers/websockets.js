@@ -39,7 +39,7 @@ var myWebSockets = {};
     q.connect = function(link_to_ws) {
         ws = new WebSocket('ws://' + link_to_ws);
         ws.onmessage = receptEvent;
-        ws.onclose = closed;
+        ws.onclose = close;
         ws.onopen = openned;
     }
 

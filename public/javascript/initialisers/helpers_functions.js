@@ -14,3 +14,11 @@ var getCarById = function (id) {
         return hisCarModel;
     }
 }
+
+var GetImageData = function(modelImage){
+    clearCanvas();
+    canvasContext.drawImage(modelImage.image, modelImage.x,modelImage.y);
+    returned = canvasContext.getImageData(modelImage.x, modelImage.y, modelImage.image.width, modelImage.image.height);
+    clearCanvas();
+    return returned;
+}
