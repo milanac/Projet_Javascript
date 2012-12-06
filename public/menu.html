@@ -18,14 +18,13 @@
 
 	<script type="text/javascript">
 	  divs = selectorAll(".event");
-	  alert(divs);
 	  //boucle
 	  for(i = 0; i < divs.length; i++){
 	    divs[i].addEventListener("click", function(event){
 	      // this.data.id
 	      if(this.dataset.id == "play"){
 	        alert("play");
-	        selectorFirst("#menu").style.opacity = 0;
+	        selectorFirst(".menu").style.opacity = 0;
 	      }else if(this.dataset.id == "score"){
 	      	alert("score")
 	      }
